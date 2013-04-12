@@ -1,57 +1,42 @@
-# Brunch with js
-This is a simple js skeleton for [Brunch](http://brunch.io/).
+# Назначение
+Этот проект позволяет быстро создать и развернуть js-приложение
+с помощью [Brunch](http://brunch.io/).
 
-Main languages are JavaScript,
+Основные технологии: JavaScript,
 [Stylus](http://learnboost.github.com/stylus/) and
-[Handlebars](http://handlebarsjs.com/).
+[Handlebars](http://handlebarsjs.com/)
+(возможно, Stylus будет заменен на less).
 
-## Getting started
+## Начало работы
 
-Run `brunch new <app> -s github://brunch/simple-js-skeleton` & `brunch build`.
-See more info on the [official site](http://brunch.io)
+Запустите в командной строке `brunch new <app> -s https://github.com/designeng/marbp` & `brunch build`.
+Для детальной информации см. [официальный сайт brunch](http://brunch.io)
 
-## Overview
 
-    config.coffee
-    README.md
-    /app/
-      /assets/
-        index.html
-        images/
-      /lib/
-      models/
-      styles/
-      views/
-        templates/
-      application.js
-      initialize.js
-    /test/
-    /vendor/
-      scripts/
-        backbone.js
-        jquery.js
-        console-helper.js
-        underscore.js
-      styles/
-        normalize.css
-        helpers.css
+* `config.coffee` - содержит конфигурацию вашего приложения. Здесь вы указываете плагины /
+технологии, которые будут использоваться в проекте.
+* `app/assets` содержит изображения / статические файлы. Содержание этой директории будет скопировано
+в папку `build/` без изменений.
+Директория `app/` может содержать файлы, которые будут компилированы. Файлы со скриптами на языках,
+компилируемых в JS (coffeescript, roy etc.) или js-файлы  будут автоматически обернуты в замыкания,
+и впоследствии их можно будет загружать при помощи `require('module/location')`.
+* `test/` предназначена для размещения здесь юнит-тестов.
+* `vendor/` содержит все third-party библиотеки. Их код не будет обернут в замыкания, и модули созданы не будут.
+Запуск команды brunch build создаст один общий файл vendors.js, который будет загружен одномоментно.
 
-* `config.coffee` contains configuration of your app. You can set plugins /
-languages that would be used here.
-* `app/assets` contains images / static files. Contents of the directory would
-be copied to `build/` without change.
-Other `app/` directories could contain files that would be compiled. Languages,
-that compile to JS (coffeescript, roy etc.) or js files and located in app are 
-automatically wrapped in module closure so they can be loaded by 
-`require('module/location')`.
-* `app/models` & `app/views` contain base classes your app should inherit from.
-* `test/` contains feature & unit tests.
-* `vendor/` contains all third-party code. The code wouldn’t be wrapped in
-modules, it would be loaded instantly instead.
+Также по команде `brunch build` (или команде `brunch watch`) создастся директория `public/` (по умолчанию) для всего  сгенерированного кода.
 
-This all will generate `public/` (by default) directory when `brunch build` or `brunch watch` is executed.
 
-## Other
+Плагин auto-reload-brunch позволяет вести разработку в стиле Live preview (без необходимости вручную перезагружать страницу всякий раз, когда где-либо в исходниках сделаны изменения). Изпользуется порт 1234 (см. настройки `config.coffee`), при необходимости он может быть заменен на другой, для этого нужно изменить порт и в настройках, и в скрипте на странице assets/index.html:
+
+```js
+window.brunch = window.brunch || {};
+    window.brunch['auto-reload'] = {enabled: true, port:1234};
+```
+
+Более детальная информация по auto reload находится здес[здесь](https://github.com/brunch/auto-reload-brunch)
+
+## Другое
 Versions of software the skeleton uses:
 
 * jQuery 1.7.2
@@ -59,5 +44,5 @@ Versions of software the skeleton uses:
 * Underscore 1.3.3
 * HTML5Boilerplate 3.0.3
 
-The license is [public domain](http://creativecommons.org/publicdomain/zero/1.0/).
-Use it however you want.
+По лицензии [public domain](http://creativecommons.org/publicdomain/zero/1.0/).
+Используйте данный проект по вашему усмотрению.
